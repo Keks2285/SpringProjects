@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<h2>Фильтрация</h2>
+<form >
+  <input type="text" name="firstname">
+  <button formmethod="post"  formaction="/employe/filterContains/result" type="submit">Найти вхождения</button>
+  <button formmethod="post"  formaction="/employe/filterAll/result" type="submit">Найти целиком</button>
+  <table border="1" style="border-collapse">
+    <tr>
+      <th>Фамилия</th>
+      <th>Имя</th>
+      <th>Отчество</th>
+      <th>Оклад</th>
+      <th>Возраст</th>
+    </tr>
+    <tr  th:each="el : ${result}" style="align:left;">
+      <td th:text="${el.firstname}" style="border:2px solid black;"></td>
+      <td th:text="${el.lastname}" style="border:2px solid black;"></td>
+      <td th:text="${el.middlename}" style="border:2px solid black;"></td>
+      <td th:text="${el.oklad}" style="border:2px solid black;"></td>
+      <td th:text="${el.age}" style="border:2px solid black;"></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

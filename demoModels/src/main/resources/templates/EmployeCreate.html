@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Добавление новой статьи</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form th:action="${'/employe/add'}" method="post">
+  <input type="text" name="firstname" placeholder="Введите Фамилию">
+  <input type="text" name="lastname" placeholder="Введите Имя">
+  <input type="text" name="middlename" placeholder="Введите Отчество">
+  <input type="number" name="age" placeholder="Введите Возраст">
+  <input type="number" name="oklad" placeholder="Введите оклад">
+  <br>
+  <button type="submit">Добавить сотрудника</button>
+</form>
+</body>
+</html>

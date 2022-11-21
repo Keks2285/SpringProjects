@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Сотрудники</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Все товары</h1>
+<p style="margin: 0 10 0 5;"><a style="margin: 0 10 0 5;" href="/product/filter">Поиск товара по названию</a></p>
+<p style="margin: 0 10 0 5;"><a style="margin: 0 10 0 5;" href="/product/add">Добавить товар</a></p>
+
+<p style="margin: 0 10 0 5;"><a  href="/">Список сотрудников</a></p>
+</br>
+<div style="height:50px"></div>
+<table border="1" style="border-collapse">
+  <tr>
+    <th>Название</th>
+    <th>Цена</th>
+    <th>Количество</th>
+    <th>Страна</th>
+    <th>Описание</th>
+  </tr>
+  <tr  th:each="el : ${products}" style="align:left;">
+    <td th:text="${el.nameproduct}" style="border:2px solid black;"></td>
+    <td th:text="${el.price}" style="border:2px solid black;"></td>
+    <td th:text="${el.value}" style="border:2px solid black;"></td>
+    <td th:text="${el.country}" style="border:2px solid black;"></td>
+    <td th:text="${el.description}" style="border:2px solid black;"></td>
+  </tr>
+</table>
+
+
+
+</body>
+</html>

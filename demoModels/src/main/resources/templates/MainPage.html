@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Сотрудники</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Все сотрудники</h1>
+<p style="margin: 0 10 0 5;"><a style="margin: 0 10 0 5;" href="/employe/filter">Поиск сотрудников по фамилии</a></p>
+<p style="margin: 0 10 0 5;"><a style="margin: 0 10 0 5;" href="/employe/add">Добавить сотрудника</a></p>
+
+<p style="margin: 0 10 0 5;"><a  href="/products">Список Товаров</a></p>
+</br>
+<div style="height:50px"></div>
+<table border="1" style="border-collapse">
+  <tr>
+    <th>Фамилия</th>
+    <th>Имя</th>
+    <th>Отчество</th>
+    <th>Оклад</th>
+    <th>Возраст</th>
+  </tr>
+  <tr  th:each="el : ${employers}" style="align:left;">
+    <td th:text="${el.firstname}" style="border:2px solid black;"></td>
+    <td th:text="${el.lastname}" style="border:2px solid black;"></td>
+    <td th:text="${el.middlename}" style="border:2px solid black;"></td>
+    <td th:text="${el.oklad}" style="border:2px solid black;"></td>
+    <td th:text="${el.age}" style="border:2px solid black;"></td>
+  </tr>
+</table>
+
+
+<!--<div th:each="el : ${employers}" style="align:left;">-->
+<!--  <p >Фамилия: <font th:text="${el.firstname}"></font></p>-->
+<!--  <p >Имя: <font th:text="${el.lastname}"></font></p>-->
+<!--  <p >Отчество: <font th:text="${el.middlename}"></font></p>-->
+<!--  <p >Оклад: <font th:text="${el.oklad}"></font></p>-->
+<!--  <p >Возраст: <font th:text="${el.age}"></font></p>-->
+<!--  <br>-->
+<!--</div>-->
+</body>
+</html>
