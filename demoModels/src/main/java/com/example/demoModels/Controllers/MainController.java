@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -40,9 +41,11 @@ public class MainController {
                               @RequestParam String middlename,
                               @RequestParam int age,
                               @RequestParam double oklad,
+                             @RequestParam boolean isalive,
                               Model model)
     {
-        Employe employe = new Employe(firstname,lastname,middlename, age, oklad);
+       // if (isalive==null) isalive=false;
+        Employe employe = new Employe(firstname,lastname,middlename, age, oklad,isalive);
         employeRepository.save(employe);
         return "redirect:/";
     }
@@ -67,9 +70,10 @@ public class MainController {
                              @RequestParam int value,
                              @RequestParam String country,
                              @RequestParam String description,
+                             @RequestParam Date creationdate,
                              Model model)
     {
-        Product product = new Product(nameproduct,price,value, country, description);
+        Product product = new Product(nameproduct,price,value, country, description,creationdate);
         productRepository.save(product);
         return "redirect:/products";
     }

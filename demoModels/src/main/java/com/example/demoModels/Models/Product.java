@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Date;
 
 
 @Entity
@@ -17,12 +18,24 @@ public class Product {
     private int value;
     private String country;
     private String description;
-    public Product(String nameproduct, double price, int value, String country, String description) {
+
+    private Date creationdate;
+
+    public Date getCreationdate() {
+        return creationdate;
+    }
+
+    public void setCreationdate(Date creationdate) {
+        this.creationdate = creationdate;
+    }
+
+    public Product(String nameproduct, double price, int value, String country, String description, Date creationdate) {
         this.nameproduct = nameproduct;
         this.price = price;
         this.value = value;
         this.country = country;
         this.description = description;
+        this.creationdate=creationdate;
     }
     public Product(){}
 

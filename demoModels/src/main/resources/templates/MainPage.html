@@ -19,6 +19,7 @@
     <th>Отчество</th>
     <th>Оклад</th>
     <th>Возраст</th>
+    <th>Жив/мертв</th>
   </tr>
   <tr  th:each="el : ${employers}" style="align:left;">
     <td th:text="${el.firstname}" style="border:2px solid black;"></td>
@@ -26,6 +27,7 @@
     <td th:text="${el.middlename}" style="border:2px solid black;"></td>
     <td th:text="${el.oklad}" style="border:2px solid black;"></td>
     <td th:text="${el.age}" style="border:2px solid black;"></td>
+    <td th:text="${el.isalive}" style="border:2px solid black;"></td>
   </tr>
 </table>
 

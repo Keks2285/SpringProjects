@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.swing.text.StyledEditorKit;
 
 @Entity
 public class Employe  {
@@ -14,12 +15,23 @@ public class Employe  {
     private int age;
     private double oklad;
 
-    public Employe(String firstname, String lastname, String middlename, int age, double oklad) {
+    private boolean isalive;
+
+    public boolean isIsalive() {
+        return isalive;
+    }
+
+    public void setIsalive(boolean isalive) {
+        this.isalive = isalive;
+    }
+
+    public Employe(String firstname, String lastname, String middlename, int age, double oklad, boolean isalive) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.middlename = middlename;
         this.age = age;
         this.oklad = oklad;
+        this.isalive = isalive;
     }
 
     public Employe(){

@@ -7,9 +7,10 @@
 <body>
 <form th:action="${'/product/add'}" method="post">
   <input type="text" name="nameproduct" placeholder="Введите ФамиНазвание продукта">
-  <input type="text" name="price" placeholder="Введите Цену">
+  <input type="number" name="price" placeholder="Введите Цену">
   <input type="number" name="value" placeholder="Введите Колличество">
   <input type="text" name="country" placeholder="Введите Страну производителя">
+  <input type="date" name="creationdate" placeholder="Введите дату">
   <textarea  type="number" name="description" placeholder="Введите описание"></textarea>
   <br>
   <button type="submit">Добавить товар</button>
