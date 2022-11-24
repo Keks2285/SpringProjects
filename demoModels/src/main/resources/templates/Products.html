@@ -20,6 +20,7 @@
     <th>Страна</th>
     <th>Описание</th>
     <th>Дата производства</th>
+    <th>Информация</th>
   </tr>
   <tr  th:each="el : ${products}" style="align:left;">
     <td th:text="${el.nameproduct}" style="border:2px solid black;"></td>
@@ -28,6 +29,7 @@
     <td th:text="${el.country}" style="border:2px solid black;"></td>
     <td th:text="${el.description}" style="border:2px solid black;"></td>
     <td th:text="${el.creationdate}" style="border:2px solid black;"></td>
+    <td><a th:href="'/product/'+${el.id}">Подробнее</a></td>
   </tr>
 </table>
 

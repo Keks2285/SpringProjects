@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="el:${employe}">
+    <h2> Потробнее о сотруднике</h2>
+    <h3 th:text="${el.firstname}+' '+${el.lastname}+' '+${el.middlename}"></h3>
+    <p>Возраст:<font th:text="${el.age}"></font></p>
+    <p>Оклад:<font th:text="${el.oklad}"></font></p>
+    <p>Жив:<font th:text="${el.isalive}"></font></p>
+    <form>
+        <button th:href="'/employe/remove/'+${el.id}"> Удалить </button>
+    </form>
+
+    <p>
+        <a th:href="'/employe/edit/'+${el.id}"> Редактировать </a>
+    </p>
+</div>
+</body>
+</html>

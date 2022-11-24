@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение данных о товаре</title>
+</head>
+<body>
+<form th:action="'/product/edit/'+${el.id}" method="post" th:each="el:${product}">
+    <input type="text" name="nameproduct" th:value="${el.nameproduct}" placeholder="Введите Название продукта">
+    <input type="text" name="price" th:value="${el.price}" placeholder="Введите цену">
+    <input type="text" name="value" th:value="${el.value}" placeholder="Введите количество">
+    <input type="text" name="country" th:value="${el.country}" placeholder="Введите страну производителя">
+    <input type="date" name="creationdate" th:value="${el.creationdate}" placeholder="Введите дату">
+    <textarea  type="text" th:text="${el.description}" name="description" placeholder="Введите описание"></textarea>
+    <br>
+    <button type="submit">Изменить данные сотрудника</button>
+</form>
+</body>
+</html>

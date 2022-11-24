@@ -5,16 +5,16 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-  <form th:action="${'/employe/add'}" method="post">
-    <input type="text" name="firstname" placeholder="Введите Фамилию">
-    <input type="text" name="lastname" placeholder="Введите Имя">
-    <input type="text" name="middlename" placeholder="Введите Отчество">
-    <input type="number" name="age" placeholder="Введите Возраст">
-    <input type="number" name="oklad" placeholder="Введите оклад">
-    <p><input type="radio" value="true" checked name="isalive">Жив</p>
-    <p><input type="radio" value="false" name="isalive">Мертв</p>
-    <br>
-    <button type="submit">Добавить сотрудника</button>
-  </form>
+    <form th:action="${'/employe/add'}" method="post">
+      <input type="text" name="firstname" placeholder="Введите Фамилию">
+      <input type="text" name="lastname" placeholder="Введите Имя">
+      <input type="text" name="middlename" placeholder="Введите Отчество">
+      <input type="number" name="age" placeholder="Введите Возраст">
+      <input type="number" name="oklad" placeholder="Введите оклад">
+      <p><input type="radio" value="true" checked name="isalive">Жив</p>
+      <p><input type="radio" value="false" name="isalive">Мертв</p>
+      <br>
+      <button type="submit">Добавить сотрудника</button>
+    </form>
 </body>
 </html>

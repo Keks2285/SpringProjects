@@ -5,16 +5,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.swing.text.StyledEditorKit;
+import javax.validation.constraints.*;
 
 @Entity
 public class Employe  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstname, lastname, middlename;
-    private int age;
-    private double oklad;
+    @Size(min=2, max=20, message ="Фамилия не может быть меньше 2 и не больше 20")
+    @Pattern(regexp = "^[а-яА-Я]+$", message = "Разрешены только буквы кириллицы")
+    private String firstname;
+    @Size(min=2, max=20, message ="Имя не может быть меньше 2 и не больше 20")
+    @Pattern(regexp = "^[а-яА-Я]+$", message = "Разрешены только буквы кириллицы")
+    private String lastname;
 
+    private String middlename;
+    @Min(value = 18,message = "Возраст не может быть меньше 18")
+    @Pattern(regexp = "^[а-яА-Я]+$", message = "Разрешены только буквы кириллицы")
+    private int age;
+    @Min(value=15000,message = "Оклад не может быть меньше 15000")
+    private double oklad;
+    @NotNull()
     private boolean isalive;
 
     public boolean isIsalive() {

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение данных сотрудника</title>
+</head>
+<body>
+<form th:action="'/employe/edit/'+${el.id}" method="post" th:each="el:${employe}">
+    <input type="text" name="firstname" th:value="${el.firstname}" placeholder="Введите Фамилию">
+    <input type="text" name="lastname" th:value="${el.lastname}" placeholder="Введите Имя">
+    <input type="text" name="middlename" th:value="${el.middlename}" placeholder="Введите Отчество">
+    <input type="number" name="age" th:value="${el.age}" placeholder="Введите Возраст">
+    <input type="number" name="oklad" th:value="${el.oklad}" placeholder="Введите оклад">
+    <p>
+      Жив/Мертв: <input type="checkbox" value="true" th:checked="${el.isalive}" name="isalive">
+    </p>
+    <br>
+    <button type="submit">Изменить данные сотрудника</button>
+</form>
+</body>
+</html>

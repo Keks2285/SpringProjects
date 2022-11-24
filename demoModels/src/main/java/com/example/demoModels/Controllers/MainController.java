@@ -9,8 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
+import javax.validation.Valid;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -42,10 +46,11 @@ public class MainController {
                               @RequestParam int age,
                               @RequestParam double oklad,
                              @RequestParam boolean isalive,
+                              @Valid Employe employe,
                               Model model)
     {
        // if (isalive==null) isalive=false;
-        Employe employe = new Employe(firstname,lastname,middlename, age, oklad,isalive);
+    //    Employe employe = new Employe(firstname,lastname,middlename, age, oklad,isalive);
         employeRepository.save(employe);
         return "redirect:/";
     }
@@ -71,9 +76,10 @@ public class MainController {
                              @RequestParam String country,
                              @RequestParam String description,
                              @RequestParam Date creationdate,
+                             @Valid Product product,
                              Model model)
     {
-        Product product = new Product(nameproduct,price,value, country, description,creationdate);
+       // Product product = new Product(nameproduct,price,value, country, description,creationdate);
         productRepository.save(product);
         return "redirect:/products";
     }
@@ -119,5 +125,122 @@ public class MainController {
         List<Product> result = productRepository.findByNameproduct(nameproduct);
         model.addAttribute("result", result);
         return "FilterProduct";
+    }
+
+
+
+
+
+
+
+
+    @GetMapping("/employe/{id}")
+    public String getEmployedata(@PathVariable(value = "id") long id,Model model)
+    {
+        Optional<Employe> employe = employeRepository.findById(id);
+        ArrayList<Employe> employeRes = new ArrayList<>();
+        employe.ifPresent(employeRes::add);
+        model.addAttribute("employe", employeRes);
+        if(!employeRepository.existsById(id)){
+            return "redirect:/";
+        }
+        return "EmployeDetails";
+    }
+    @GetMapping("/product/{id}")
+    public String getProductdata(@PathVariable(value = "id") long id,Model model)
+    {
+        Optional<Product> product = productRepository.findById(id);
+        ArrayList<Product> productRes = new ArrayList<>();
+        product.ifPresent(productRes::add);
+        model.addAttribute("product", productRes);
+        if(!productRepository.existsById(id)){
+            return "redirect:/products";
+        }
+        return "ProductDetails";
+    }
+
+
+    @PostMapping("/employe/remove/{id}")
+    public String deleteEmployedata(@PathVariable(value = "id") long id,Model model)
+    {
+        Employe employe = employeRepository.findById(id).orElseThrow();
+        employeRepository.delete(employe);
+        return "redirect:/";
+    }
+
+    @PostMapping("/product/{id}/remove/")
+    public String deleteProductdata(@PathVariable(value = "id") long id,Model model)
+    {
+        Product product = productRepository.findById(id).orElseThrow();
+        productRepository.delete(product);
+        return "redirect:/products";
+    }
+
+    @GetMapping("/employe/edit/{id}")
+    public String editEmployedataPage(@PathVariable(value = "id") long id,Model model)
+    {
+
+        Optional<Employe> employe = employeRepository.findById(id);
+        ArrayList<Employe> employeRes = new ArrayList<>();
+        employe.ifPresent(employeRes::add);
+        model.addAttribute("employe", employeRes);
+        if(!employeRepository.existsById(id)){
+            return "redirect:/";
+        }
+        return "EmployeEdit";
+    }
+
+    @GetMapping("/product/edit/{id}")
+    public String editProductdataPage(@PathVariable(value = "id") long id,Model model)
+    {
+
+        Optional<Product> product = productRepository.findById(id);
+        ArrayList<Product> productRes = new ArrayList<>();
+        product.ifPresent(productRes::add);
+        model.addAttribute("product", productRes);
+        if(!productRepository.existsById(id)){
+            return "redirect:/products";
+        }
+        return "ProductEdit";
+    }
+
+    @PostMapping("/employe/edit/{id}")
+    public String editEmployedata(@PathVariable(value = "id") long id,
+                                  @RequestParam String firstname,
+                                  @RequestParam String lastname,
+                                  @RequestParam String middlename,
+                                  @RequestParam int age,
+                                  @RequestParam double oklad,
+                                  @RequestParam(defaultValue = "false"
+                                  ) boolean isalive ,Model  model)
+    {
+        Employe employe = employeRepository.findById(id).orElseThrow();
+        employe.setFirstname(firstname);
+        employe.setAge(age);
+        employe.setLastname(lastname);
+        employe.setMiddlename(middlename);
+        employe.setOklad(oklad);
+        employe.setIsalive(isalive);
+        employeRepository.save(employe);
+        return "redirect:/";
+    }
+    @PostMapping("/product/edit/{id}")
+    public String editProductdata(@PathVariable(value = "id") long id,
+                                  @RequestParam String nameproduct,
+                                  @RequestParam double price,
+                                  @RequestParam int value,
+                                  @RequestParam String country,
+                                  @RequestParam String description,
+                                  @RequestParam  Date creationdate,Model  model)
+    {
+        Product product = productRepository.findById(id).orElseThrow();
+        product.setCountry(country);
+        product.setPrice(price);
+        product.setValue(value);
+        product.setNameproduct(nameproduct);
+        product.setDescription(description);
+        product.setCreationdate(creationdate);
+        productRepository.save(product);
+        return "redirect:/products";
     }
 }

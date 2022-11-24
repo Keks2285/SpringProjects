@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.sql.Date;
 
 
@@ -12,13 +16,17 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Pattern(regexp = "^[а-яА-Яa-zA-Z]+$", message = "Разрешены только буквы")
     private String nameproduct;
+    @Positive(message = "Цена должна быть больше 0")
     private double price;
+    @PositiveOrZero(message = "Количество не должно быть отрицательным")
     private int value;
+    @Pattern(regexp = "^[а-яА-Яa-zA-Z]+$", message = "Разрешены только буквы")
     private String country;
     private String description;
 
+    @PastOrPresent(message = "Нельзя задать будущую дату ")
     private Date creationdate;
 
     public Date getCreationdate() {

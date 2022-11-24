@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div th:each="el:${product}" >
+  <h2> Потробнее о товаре</h2>
+  <h3 th:text="${el.nameproduct}"></h3>
+  <p>Стоимость:<font th:text="${el.price}"></font></p>
+  <p>Количество:<font th:text="${el.value}"></font></p>
+  <p>Страна:<font th:text="${el.country}"></font></p>
+  <p>Дата производства:<font th:text="${el.creationdate}"></font></p>
+  <div>
+    <p>Описание:</p>
+    <textarea th:text="${el.description}"></textarea>
+  </div>
+  <form method="post" th:action="'/product/' +${el.id} + '/remove/'">
+    <button type="submit" > Удалить </button>
+  </form>
+  <p>
+    <a th:href="'/product/edit/'+ ${el.id}"> Редактировать </a>
+  </p>
+</div>
+</body>
+</html>
