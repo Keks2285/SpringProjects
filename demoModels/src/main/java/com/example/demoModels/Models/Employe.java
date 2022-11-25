@@ -12,20 +12,20 @@ public class Employe  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Size(min=2, max=20, message ="Фамилия не может быть меньше 2 и не больше 20")
+     @Size(min=2, max=20, message ="Фамилия не может быть меньше 2 и не больше 20")
     @Pattern(regexp = "^[а-яА-Я]+$", message = "Разрешены только буквы кириллицы")
     private String firstname;
     @Size(min=2, max=20, message ="Имя не может быть меньше 2 и не больше 20")
     @Pattern(regexp = "^[а-яА-Я]+$", message = "Разрешены только буквы кириллицы")
     private String lastname;
-
+    @Pattern(regexp = "^[а-яА-Я]+$", message = "Разрешены только буквы кириллицы")
     private String middlename;
     @Min(value = 18,message = "Возраст не может быть меньше 18")
-    @Pattern(regexp = "^[а-яА-Я]+$", message = "Разрешены только буквы кириллицы")
+   // @Pattern(regexp = "^[а-яА-Я]+$", message = "Разрешены только буквы кириллицы")
     private int age;
     @Min(value=15000,message = "Оклад не может быть меньше 15000")
     private double oklad;
-    @NotNull()
+    //@NotNull()
     private boolean isalive;
 
     public boolean isIsalive() {

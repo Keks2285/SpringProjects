@@ -1,5 +1,6 @@
 package com.example.demoModels.Controllers;
 
+import net.bytebuddy.implementation.bind.annotation.BindingPriority;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.demoModels.Repo.EmployeRepository;
 import com.example.demoModels.Models.Employe;
@@ -7,6 +8,7 @@ import com.example.demoModels.Repo.ProductRepository;
 import com.example.demoModels.Models.Product;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
@@ -38,51 +40,45 @@ public class MainController {
         model.addAttribute("products",products);
         return "Products";
     }
-
-    @PostMapping("/employe/add")
-    public String employeAdd(@RequestParam String firstname,
-                              @RequestParam String lastname,
-                              @RequestParam String middlename,
-                              @RequestParam int age,
-                              @RequestParam double oklad,
-                             @RequestParam boolean isalive,
-                              @Valid Employe employe,
-                              Model model)
-    {
-       // if (isalive==null) isalive=false;
-    //    Employe employe = new Employe(firstname,lastname,middlename, age, oklad,isalive);
-        employeRepository.save(employe);
-        return "redirect:/";
-    }
-
-
-
-    @GetMapping("/employe/add")
-    public String employeAddView(Model model)
-    {
-        return "EmployeCreate";
-    }
-
     @GetMapping("/product/add")
-    public String prooductAddView(Model model)
+    public String prooductAddView(Product product)
     {
         return "ProductCreate";
     }
 
     @PostMapping("/product/add")
-    public String productAdd(@RequestParam String nameproduct,
-                             @RequestParam double price,
-                             @RequestParam int value,
-                             @RequestParam String country,
-                             @RequestParam String description,
-                             @RequestParam Date creationdate,
-                             @Valid Product product,
-                             Model model)
+    public String productAdd(@Valid Product product,
+                             BindingResult bindingResult)
     {
-       // Product product = new Product(nameproduct,price,value, country, description,creationdate);
+        if(bindingResult.hasErrors()){return "ProductCreate";}
+        // Product product = new Product(nameproduct,price,value, country, description,creationdate);
         productRepository.save(product);
         return "redirect:/products";
     }
+    @PostMapping("/employe/add")
+    public String employeAdd(@Valid Employe employe,
+                             BindingResult bindingResult)
+    {
+
+        if(bindingResult.hasErrors()){return "EmployeCreate";}
+        // Product product = new Product(nameproduct,price,value, country, description,creationdate);
+        employeRepository.save(employe);
+        return "redirect:/";
+       // if (isalive==null) isalive=false;
+    //    Employe employe = new Employe(firstname,lastname,middlename, age, oklad,isalive);
+        //employeRepository.save(employe);
+        //return "redirect:/";
+    }
+
+
+
+    @GetMapping("/employe/add")
+    public String employeAddView(Employe employe)
+    {
+        return "EmployeCreate";
+    }
+
+
 
     @GetMapping("/employe/filter")
     public String employeFilter(Model model)
@@ -179,25 +175,33 @@ public class MainController {
     @GetMapping("/employe/edit/{id}")
     public String editEmployedataPage(@PathVariable(value = "id") long id,Model model)
     {
-
-        Optional<Employe> employe = employeRepository.findById(id);
-        ArrayList<Employe> employeRes = new ArrayList<>();
-        employe.ifPresent(employeRes::add);
-        model.addAttribute("employe", employeRes);
+        Employe res = employeRepository.findById(id).orElseThrow();
+        model.addAttribute("employe",res);
         if(!employeRepository.existsById(id)){
             return "redirect:/";
         }
         return "EmployeEdit";
+
+//        Optional<Employe> employe = employeRepository.findById(id);
+//        ArrayList<Employe> employeRes = new ArrayList<>();
+//        employe.ifPresent(employeRes::add);
+//        model.addAttribute("employe", employeRes);
+//        if(!employeRepository.existsById(id)){
+//            return "redirect:/";
+//        }
+//        return "EmployeEdit";
     }
 
     @GetMapping("/product/edit/{id}")
-    public String editProductdataPage(@PathVariable(value = "id") long id,Model model)
+    public String editProductdataPage(@PathVariable(value = "id") long id, Model model)
     {
 
-        Optional<Product> product = productRepository.findById(id);
-        ArrayList<Product> productRes = new ArrayList<>();
-        product.ifPresent(productRes::add);
-        model.addAttribute("product", productRes);
+//        Optional<Product> product = productRepository.findById(id);
+//        ArrayList<Product> productRes = new ArrayList<>();
+//        product.ifPresent(productRes::add);
+//        model.addAttribute("product", productRes);
+        Product res = productRepository.findById(id).orElseThrow();
+        model.addAttribute("product",res);
         if(!productRepository.existsById(id)){
             return "redirect:/products";
         }
@@ -205,42 +209,34 @@ public class MainController {
     }
 
     @PostMapping("/employe/edit/{id}")
-    public String editEmployedata(@PathVariable(value = "id") long id,
-                                  @RequestParam String firstname,
-                                  @RequestParam String lastname,
-                                  @RequestParam String middlename,
-                                  @RequestParam int age,
-                                  @RequestParam double oklad,
-                                  @RequestParam(defaultValue = "false"
-                                  ) boolean isalive ,Model  model)
+    public String editEmployedata(@PathVariable(value = "id")  long id, @Valid Employe employe ,   BindingResult bindingResult)
     {
-        Employe employe = employeRepository.findById(id).orElseThrow();
-        employe.setFirstname(firstname);
-        employe.setAge(age);
-        employe.setLastname(lastname);
-        employe.setMiddlename(middlename);
-        employe.setOklad(oklad);
-        employe.setIsalive(isalive);
+        if(bindingResult.hasErrors()) return "EmployeEdit";
         employeRepository.save(employe);
         return "redirect:/";
+//        Employe employe = employeRepository.findById(id).orElseThrow();
+//        employe.setFirstname(firstname);
+//        employe.setAge(age);
+//        employe.setLastname(lastname);
+//        employe.setMiddlename(middlename);
+//        employe.setOklad(oklad);
+//        employe.setIsalive(isalive);
+//        employeRepository.save(employe);
+//        return "redirect:/";
     }
     @PostMapping("/product/edit/{id}")
-    public String editProductdata(@PathVariable(value = "id") long id,
-                                  @RequestParam String nameproduct,
-                                  @RequestParam double price,
-                                  @RequestParam int value,
-                                  @RequestParam String country,
-                                  @RequestParam String description,
-                                  @RequestParam  Date creationdate,Model  model)
+    public String editProductdata(@PathVariable(value = "id")  long id, @Valid Product product ,   BindingResult bindingResult)
     {
-        Product product = productRepository.findById(id).orElseThrow();
-        product.setCountry(country);
-        product.setPrice(price);
-        product.setValue(value);
-        product.setNameproduct(nameproduct);
-        product.setDescription(description);
-        product.setCreationdate(creationdate);
+//        Product product = productRepository.findById(id).orElseThrow();
+//        product.setCountry(country);
+//        product.setPrice(price);
+//        product.setValue(value);
+//        product.setNameproduct(nameproduct);
+//        product.setDescription(description);
+//        product.setCreationdate(creationdate);
+        if(bindingResult.hasErrors()) return "ProductEdit";
         productRepository.save(product);
         return "redirect:/products";
     }
 }
+

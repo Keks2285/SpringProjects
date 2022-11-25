@@ -1,13 +1,9 @@
 package com.example.demoModels.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.PositiveOrZero;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.sql.Date;
 
 
@@ -16,17 +12,23 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+   // @NotNull(message = "Название не должно быть пустым")
     @Pattern(regexp = "^[а-яА-Яa-zA-Z]+$", message = "Разрешены только буквы")
+    @NotBlank(message = "Название не должно быть пустым")
     private String nameproduct;
-    @Positive(message = "Цена должна быть больше 0")
+   @Positive(message = "Цена должна быть больше 0")
+   @NotNull(message = "Заполните цену")
     private double price;
-    @PositiveOrZero(message = "Количество не должно быть отрицательным")
+    //@PositiveOrZero(message = "Количество не должно быть отрицательным")
+    @Min(value = 1,message = "Количество должно быть больше 0")
+    @NotNull(message = "Заполните цену")
     private int value;
     @Pattern(regexp = "^[а-яА-Яa-zA-Z]+$", message = "Разрешены только буквы")
     private String country;
+    @NotBlank(message = "Описание не должно быть пустым")
     private String description;
-
-    @PastOrPresent(message = "Нельзя задать будущую дату ")
+    //@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date creationdate;
 
     public Date getCreationdate() {
