@@ -45,7 +45,7 @@ public class RelationController {
     public String createCarPost(Car car, @RequestParam String firstname) {
         car.setOwner(personRepository.findByFirstname(firstname));
         carRepository.save(car);
-        return "redirect:/";
+        return "redirect:/main";
     }
 
     @GetMapping("person/add")
@@ -64,7 +64,7 @@ public class RelationController {
     public String createPersonPost(Person person, @RequestParam String number) {
         person.setPassport(passportRepository.findByNumber(number));
         personRepository.save(person);
-        return "redirect:/";
+        return "redirect:/main";
     }
 
 
@@ -75,7 +75,7 @@ public class RelationController {
     @PostMapping("computer/add")
     public String createCompputerPost(Computer computer) {
         computerRepository.save(computer);
-        return "redirect:/";
+        return "redirect:/main";
     }
 
 
@@ -94,6 +94,6 @@ public class RelationController {
         user.getComputers().add(pc);
         personRepository.save(user);
         // computerRepository.save(computer);
-        return "redirect:/";
+        return "redirect:/main";
     }
 }

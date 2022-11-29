@@ -25,7 +25,7 @@ public class MainController {
     @Autowired
     private ProductRepository productRepository;
 
-    @GetMapping("/")
+    @GetMapping("/main")
     public String employerMain(Model model)
     {
         Iterable<Employe> employers = employeRepository.findAll();
@@ -138,7 +138,7 @@ public class MainController {
         employe.ifPresent(employeRes::add);
         model.addAttribute("employe", employeRes);
         if(!employeRepository.existsById(id)){
-            return "redirect:/";
+            return "redirect:/main";
         }
         return "EmployeDetails";
     }
@@ -161,7 +161,7 @@ public class MainController {
     {
         Employe employe = employeRepository.findById(id).orElseThrow();
         employeRepository.delete(employe);
-        return "redirect:/";
+        return "redirect:/main";
     }
 
     @PostMapping("/product/{id}/remove/")
@@ -169,7 +169,7 @@ public class MainController {
     {
         Product product = productRepository.findById(id).orElseThrow();
         productRepository.delete(product);
-        return "redirect:/products";
+        return "redirect:/mainproducts";
     }
 
     @GetMapping("/employe/edit/{id}")
@@ -178,7 +178,7 @@ public class MainController {
         Employe res = employeRepository.findById(id).orElseThrow();
         model.addAttribute("employe",res);
         if(!employeRepository.existsById(id)){
-            return "redirect:/";
+            return "redirect:/main";
         }
         return "EmployeEdit";
 
@@ -214,7 +214,7 @@ public class MainController {
     {
         if(bindingResult.hasErrors()) return "EmployeEdit";
         employeRepository.save(employe);
-        return "redirect:/";
+        return "redirect:/main";
     }
     @PostMapping("/product/edit/{id}")
     public String editProductdata(@PathVariable(value = "id")  long id, @Valid Product product ,   BindingResult bindingResult)

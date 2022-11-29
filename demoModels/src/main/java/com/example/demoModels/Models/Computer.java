@@ -14,7 +14,9 @@ public class Computer {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
+    private String model;
 
+    private int year;
     public Computer(String model, int year) {
         this.model = model;
         this.year = year;
@@ -46,9 +48,7 @@ public class Computer {
 
     public Computer() {
     }
-    private String model;
 
-    private int year;
 
     @ManyToMany
     @JoinTable(name="person_computer",
