@@ -29,6 +29,7 @@ public class Product {
     @NotBlank(message = "Описание не должно быть пустым")
     private String description;
     //@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @NotNull(message = "введите дату изготовления")
     private Date creationdate;
 
     public Date getCreationdate() {

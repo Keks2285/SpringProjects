@@ -21,11 +21,9 @@ public class Employe  {
     @Pattern(regexp = "^[а-яА-Я]+$", message = "Разрешены только буквы кириллицы")
     private String middlename;
     @Min(value = 18,message = "Возраст не может быть меньше 18")
-   // @Pattern(regexp = "^[а-яА-Я]+$", message = "Разрешены только буквы кириллицы")
     private int age;
     @Min(value=15000,message = "Оклад не может быть меньше 15000")
     private double oklad;
-    //@NotNull()
     private boolean isalive;
 
     public boolean isIsalive() {

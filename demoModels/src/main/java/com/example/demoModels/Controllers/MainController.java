@@ -209,20 +209,12 @@ public class MainController {
     }
 
     @PostMapping("/employe/edit/{id}")
-    public String editEmployedata(@PathVariable(value = "id")  long id, @Valid Employe employe ,   BindingResult bindingResult)
+    public String editEmployedata(@PathVariable(value = "id")  long id, @Valid Employe employe ,
+                                  BindingResult bindingResult)
     {
         if(bindingResult.hasErrors()) return "EmployeEdit";
         employeRepository.save(employe);
         return "redirect:/";
-//        Employe employe = employeRepository.findById(id).orElseThrow();
-//        employe.setFirstname(firstname);
-//        employe.setAge(age);
-//        employe.setLastname(lastname);
-//        employe.setMiddlename(middlename);
-//        employe.setOklad(oklad);
-//        employe.setIsalive(isalive);
-//        employeRepository.save(employe);
-//        return "redirect:/";
     }
     @PostMapping("/product/edit/{id}")
     public String editProductdata(@PathVariable(value = "id")  long id, @Valid Product product ,   BindingResult bindingResult)

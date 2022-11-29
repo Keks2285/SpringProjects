@@ -39,7 +39,7 @@
   <div style="color: red" th:if="${#fields.hasErrors('value')}" th:errors="*{value}"></div></br>
   <input type="text" th:field = "*{country}" name="country" placeholder="Введите Страну производителя">
   <div style="color: red" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></div></br>
-  <input type="date" value="01-01-1999"  th:field = "*{creationdate}"  name="creationdate" placeholder="Введите дату">
+  <input type="date" value="2017-06-01"  th:field = "*{creationdate}"  name="creationdate" placeholder="Введите дату">
   <div style="color: red" th:if="${#fields.hasErrors('creationdate')}" th:errors="*{creationdate}"></div></br>
   <textarea  type="text"  th:field = "*{description}" name="description" placeholder="Введите описание"></textarea>
   <div style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
