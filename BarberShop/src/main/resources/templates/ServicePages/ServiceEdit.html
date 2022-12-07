@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<header th:insert="/Blocks/Mainheader::headerMain"></header>
+<body>
+<form  th:action="@{/services/edit/{id}(id=${service.id})}"  th:object="${service}" method="post" >
+    <textarea  type="text"  th:field = "*{nameservice}" name="nameservice"  th:value="${nameservice}" placeholder="Введите название"></textarea>
+    <div style="color: red" th:if="${#fields.hasErrors('nameservice')}" th:errors="*{nameservice}"></div></br>
+    <input type="number"  th:field = "*{price}" name="price" th:value="${price}" placeholder="Введите цену">
+    <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div></br>
+    <button type="submit">Изменить услугу</button>
+</form>
+<form th:object="${service}" method="post" th:action="@{/services/remove/{id}(id=${service.id})}">
+    <button  type="submit"> Удалить </button>
+</form>
+
+</body>
+</html>

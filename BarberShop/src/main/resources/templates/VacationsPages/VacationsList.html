@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link  th:href="@{../styles/style.css}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <title>Больничнвые</title>
+</head>
+<header th:insert="/Blocks/Mainheader::headerMain"></header>
+<body>
+<h1 style="text-align:center;">Больничные</h1>
+<div>
+
+    <div style=" margin: 0 10px 10px 50px; float:left;">
+        <table class="table_dark" >
+            <tr>
+                <th>Сотрудник</th>
+                <th>Дата начала</th>
+                <th>Дата окончания</th>
+            </tr>
+            <tr  th:each="el : ${vacations}" style="align:left;">
+                <td th:text="${el.employer.firstname}+' '+${el.employer.lastname}+' '+${el.employer.middlename}" style="border:2px solid black;"></td>
+                <td th:text="${el.datebegin}" style="border:2px solid black;"></td>
+                <td th:text="${el.dateend}" style="border:2px solid black;"></td>
+                <td style="border:2px solid black;">
+                    <form  th:action="'/vacations/remove/'+${el.id}" method="post"><button type="submit" >Удалить</button></form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<div style="margin:0 0 0 25%; width:60%">
+    <form action="/vacations/add"  th:object="${vacation}" method="post">
+        <p>Выберите сотрудника</p>
+        <select name="employerid">
+            <div th:each="element : ${employers}">
+                <option   th:text="${element.firstname}+' '+${element.lastname}+' '+${element.middlename}" th:value="${element.id}"></option>
+            </div>
+        </select>
+        <input type="date"  th:field = "*{datebegin}" name="datebegin" placeholder="Дата начала">
+        <input type="date"  th:field = "*{dateend}" name="dateend       " placeholder="Дата окончания">
+
+        <button type="submit">Добавить отпуск</button>
+    </form>
+
+
+</div>
+</body>
+</html>

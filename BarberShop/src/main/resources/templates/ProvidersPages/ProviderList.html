@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link  th:href="@{../styles/style.css}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <title>Поставщики</title>
+</head>
+<header th:insert="/Blocks/Mainheader::headerMain"></header>
+<body>
+<h1 style="text-align:center;">Поставщики</h1>
+<div>
+
+    <div style=" margin: 0 10px 10px 50px; float:left;">
+        <form>
+            <input  type="text" name="nameprovider" placeholder="Название организации">
+            <button formmethod="post"  formaction="/providers/filter" type="submit">Поиск</button>
+
+        </form>
+        <table class="table_dark" >
+            <tr>
+                <th>Название</th>
+                <th>Адрес</th>
+                <th>ИНН</th>
+            </tr>
+            <tr  th:each="el : ${providers}" style="align:left;">
+                <td th:text="${el.nameprovider}" style="border:2px solid black;"></td>
+                <td th:text="${el.address}" style="border:2px solid black;"></td>
+                <td th:text="${el.inn}" style="border:2px solid black;"></td>
+                <td style="border:2px solid black;"><a th:href="'/provider/'+${el.id}">Подробнее</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div style="margin:0 0 0 25%; width:60%">
+    <form action="/providers/add"  th:object="${provider}" method="post">
+        <input type="text"  th:field = "*{nameprovider}" name="nameprovider" placeholder="Введите Название поставщика">
+        <div style="color: red" th:if="${#fields.hasErrors('nameprovider')}" th:errors="*{nameprovider}"></div></br>
+        <textarea  type="text"  th:field = "*{address}" name="address" placeholder="Введите Адрес"></textarea>
+        <div style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div></br>
+        <input type="text"  th:field = "*{inn}" name="address" placeholder="Введите ИНН">
+        <div style="color: red" th:if="${#fields.hasErrors('inn')}" th:errors="*{inn}"></div></br>
+        <br>
+        <button type="submit">Добавить Поставшика</button>
+    </form>
+
+
+</div>
+</body>
+</html>

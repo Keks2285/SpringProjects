@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <link  th:href="@{../styles/style.css}" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <title>Поставщики</title>
+</head>
+<header th:insert="/Blocks/Mainheader::headerMain"></header>
+<body>
+<h1 style="text-align:center;">Сотрудники</h1>
+<div>
+
+  <div style=" margin: 0 10px 10px 50px; float:left;">
+    <table class="table_dark" >
+      <tr>
+        <th>Ф</th>
+        <th>И</th>
+        <th>О</th>
+        <th>ИНН</th>
+        <th>Почта</th>
+        <th>Должность</th>
+      </tr>
+      <tr  th:each="el : ${employers}" style="align:left;">
+        <td th:text="${el.firstname}" style="border:2px solid black;"></td>
+        <td th:text="${el.lastname}" style="border:2px solid black;"></td>
+        <td th:text="${el.middlename}" style="border:2px solid black;"></td>
+        <td th:text="${el.inn}" style="border:2px solid black;"></td>
+        <td th:text="${el.user.email}" style="border:2px solid black;"></td>
+        <td th:text="${el.post.namepost}" style="border:2px solid black;"></td>
+        <td style="border:2px solid black;"><a th:href="'/employer/'+${el.id}">Редактировать</a></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+
+</body>
+</html>

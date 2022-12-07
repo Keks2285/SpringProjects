@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<header th:insert="/Blocks/Mainheader::headerMain"></header>
+<body>
+<form th:action="@{/taxreports/{id}(id=${taxReport.id})}"  th:object="${taxReport}" method="post">
+    <p>Выберите сотрудника</p>
+    <select name="employerid">
+        <div th:each="element : ${employers}">
+            <option   th:text="${element.firstname}+' '+${element.lastname}+' '+${element.middlename}" th:value="${element.id}"></option>
+        </div>
+    </select>
+    <input type="date"  th:field = "*{datebegin}" name="datebegin" placeholder="Дата начала">
+    <input type="date"  th:field = "*{dateend}" name="dateend" placeholder="Дата окончания">
+    <p>Дата отчета</p>
+    <input type="date"  th:field = "*{datereport}" name="datereport" placeholder="Дата отчета">
+    <p>Дата начала</p>
+    <input type="date"  th:field = "*{datebegin}" name="datebegin" placeholder="Дата начала">
+    <p>Дата окончания</p>
+    <input type="date"  th:field = "*{dateend}" name="dateend" placeholder="Дата окончания">
+    <input type="number"  th:field = "*{valuesells}" name="valuesells" placeholder="Введите объем продаж">
+    <div style="color: red" th:if="${#fields.hasErrors('valuesells')}" th:errors="*{valuesells}"></div></br>
+
+    <button type="submit">Изменить отчет</button>
+</form>
+
+
+
+</body>
+</html>

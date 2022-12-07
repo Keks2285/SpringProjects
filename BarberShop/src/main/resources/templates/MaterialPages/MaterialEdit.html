@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<header th:insert="/Blocks/Mainheader::headerMain"></header>
+<body>
+<form  th:action="@{/materials/edit/{id}(id=${material.id})}"  th:object="${material}" method="post" >
+    <p>Название:</p>
+ <textarea  type="text"  th:field = "*{name}" name="name"  th:value="${name}" placeholder="Введите Название"></textarea>
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div></br>
+    <p>Количество:</p>
+    <input type="number"  th:field = "*{valuematerials}"  th:value="${valuematerials}" name="valuematerials" placeholder="Введите Количество">
+    <div style="color: red" th:if="${#fields.hasErrors('valuematerials')}" th:errors="*{valuematerials}"></div></br>
+    <button type="submit">Изменить данные о материале</button>
+</form>
+
+</body>
+</html>

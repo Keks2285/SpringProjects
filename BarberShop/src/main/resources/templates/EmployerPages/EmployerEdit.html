@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<header th:insert="/Blocks/Mainheader::headerMain"></header>
+<body>
+<p th:text="${message}"></p>
+<form th:action="@{/employer/{id}(id=${employer.id})}"  th:object="${employer}" method="post">
+    <input type="text"  th:field = "*{firstname}" th:value="${firstname}" name="firstname" placeholder="Введите Фамилию">
+    <div style="color: red" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></div></br>
+    <input type="text"  th:field = "*{lastname}" th:value="${lastname}" name="lastname" placeholder="Введите Имя">
+    <div style="color: red" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></div></br>
+    <input type="text"  th:field = "*{middlename}" th:value="${middlename}" name="middlename" placeholder="Введите Отчество">
+    <div style="color: red" th:if="${#fields.hasErrors('middlename')}" th:errors="*{middlename}"></div></br>
+    <input type="text"  th:field = "*{inn}" th:value="${inn}" name="middlename" placeholder="Введите Инн">
+    <div style="color: red" th:if="${#fields.hasErrors('inn')}" th:errors="*{inn}"></div></br>
+    <input type="email"  name="email" placeholder="Введите почту">
+    <input type="text"  name="password" placeholder="Введите пароль">
+
+    <select name="role">
+        <div>
+            <option   th:text="Администратор"></option>
+        </div>
+        <div>
+            <option   th:text="Бухгалтер"></option>
+        </div>
+        <div>
+            <option   th:text="'Сотрудник отдела кадров'"></option>
+        </div>
+        <div>
+            <option   th:text="Кладовщик"></option>
+        </div>
+    </select>
+    <button type="submit">Изменить сотрудника</button>
+</form>
+</body>
+</html>

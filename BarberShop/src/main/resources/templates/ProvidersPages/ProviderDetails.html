@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<header th:insert="/Blocks/Mainheader::headerMain"></header>
+<body>
+<div th:each="el:${provider}">
+  <h2> Потробнее о поставщике</h2>
+  <h3 th:text="${el.nameprovider}"></h3>
+  <p>Адрес:<font th:text="${el.address}"></font></p>
+  <p>ИНН:<font th:text="${el.inn}"></font></p>
+  <form method="post" th:action="'/provider/remove/'+${el.id}">
+    <button  type="submit"> Удалить </button>
+  </form>
+
+  <p>
+    <a th:href="'/provider/edit/'+${el.id}"> Редактировать </a>
+  </p>
+  <p>
+    <a th:href="'/providers'"> Назад  </a>
+  </p>
+</div>
+
+</body>
+</html>

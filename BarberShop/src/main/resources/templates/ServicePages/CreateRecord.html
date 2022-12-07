@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<header th:insert="/Blocks/Mainheader::headerMain"></header>
+<body>
+<div>
+    <form method="post"  th:action="@{/services/recordAdd/{id}(id=${service.id})}">
+        <!-- <input type="hidden" name="emailUser" th:value="${#httpServletRequest.remoteUser.email}"> -->
+        <p>Выберите мастера</p>
+        <select name="employerid">
+            <div th:each="element : ${employers}">
+                <option   th:text="${element.firstname}+' '+${element.lastname}+' '+${element.middlename}" th:value="${element.id}"></option>
+            </div>
+        </select>
+        <p>Выберите дату</p>
+        <input type="date"   name="daterecord" placeholder="Выберите дату">
+        <button type="submit">Записаться на услугу</button>
+    </form>
+</div>
+
+</body>
+</html>

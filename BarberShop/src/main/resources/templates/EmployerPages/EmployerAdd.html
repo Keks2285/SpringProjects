@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+      <html xmlns:th="http://www.thymeleaf.org">
+      <head>
+      <title>Добавление сотрудника</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+      <header th:insert="/Blocks/Mainheader::headerMain"></header>
+<header>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Навигация</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/products">Список Товаров</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/main">Список Сотрудников</a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+  <header th:insert="/Blocks/header::headerMain"></header>
+</header>
+<body>
+<p th:text="${message}"></p>
+<form action="/employer/add"  th:object="${employer}" method="post">
+  <input type="text"  th:field = "*{firstname}" name="firstname" placeholder="Введите Фамилию">
+  <div style="color: red" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></div></br>
+  <input type="text"  th:field = "*{lastname}" name="lastname" placeholder="Введите Имя">
+  <div style="color: red" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></div></br>
+  <input type="text"  th:field = "*{middlename}" name="middlename" placeholder="Введите Отчество">
+  <div style="color: red" th:if="${#fields.hasErrors('middlename')}" th:errors="*{middlename}"></div></br>
+  <input type="text"  th:field = "*{inn}" name="middlename" placeholder="Введите Инн">
+  <div style="color: red" th:if="${#fields.hasErrors('inn')}" th:errors="*{inn}"></div></br>
+  <input type="email" name="email" placeholder="Введите почту">
+  <input type="text" name="password" placeholder="Введите пароль">
+
+  <select name="role">
+    <div>
+      <option   th:text="Администратор"></option>
+    </div>
+    <div>
+      <option   th:text="Бухгалтер"></option>
+    </div>
+    <div>
+      <option   th:text="'Сотрудник отдела кадров'"></option>
+    </div>
+    <div>
+      <option   th:text="Кладовщик"></option>
+    </div>
+  </select>
+  <button type="submit">Добавить сотрудника</button>
+</form>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>

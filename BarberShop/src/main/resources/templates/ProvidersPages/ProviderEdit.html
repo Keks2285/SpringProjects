@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<header th:insert="/Blocks/Mainheader::headerMain"></header>
+<body>
+<form  th:action="@{/provider/edit/{id}(id=${provider.id})}"  th:object="${provider}" method="post" >
+
+    <input type="text"  th:field = "*{nameprovider}" name="nameprovider"  th:value="${nameprovider}" placeholder="Введите Название поставщика">
+    <div style="color: red" th:if="${#fields.hasErrors('nameprovider')}"  th:errors="*{nameprovider}"></div></br>
+    <textarea  type="text"  th:field = "*{address}" name="address"  th:value="${address}" placeholder="Введите Адрес"></textarea>
+    <div style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div></br>
+    <input type="text"  th:field = "*{inn}" name="address"  th:value="${inn}" placeholder="Введите ИНН">
+    <div style="color: red" th:if="${#fields.hasErrors('inn')}" th:errors="*{inn}"></div></br>
+    <button type="submit">Изменить данные поставщика</button>
+</form>
+
+</body>
+</html>
